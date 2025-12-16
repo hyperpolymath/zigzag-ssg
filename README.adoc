@@ -1,1 +1,69 @@
+= zigzag-ssg
+:toc: auto
+:toclevels: 3
 
+**The definitive Zig static site generator.**
+
+== Overview
+
+zigzag-ssg is a high-performance static site generator written in Zig.
+It provides zero-overhead abstractions and compile-time execution
+for maximum efficiency.
+
+== Language Enforcement
+
+[IMPORTANT]
+====
+This SSG **MUST** be written in Zig. No exceptions.
+
+Forbidden languages for SSG logic:
+
+* Python
+* JavaScript/TypeScript
+* C/C++ (use Zig)
+* Rust (different satellite)
+* Any language other than Zig
+
+The **ONLY** non-Zig code allowed is the ReScript MCP adapter in `adapters/`.
+====
+
+== Features
+
+* Compile-time execution (comptime) for zero-cost templates
+* Manual memory management without garbage collection
+* Excellent C interop for existing libraries
+* Cross-compilation from any host
+* Small, fast binaries
+
+== Requirements
+
+* Zig 0.11+
+
+== Building
+
+[source,bash]
+----
+zig build
+./zig-out/bin/zigzag-ssg build
+----
+
+== Project Structure
+
+[source]
+----
+zigzag-ssg/
+├── src/                  # Zig source (THE SSG)
+├── adapters/             # ReScript MCP adapter only
+├── STATE.scm             # Project state
+├── ECOSYSTEM.scm         # Ecosystem position
+├── META.scm              # Architecture decisions
+└── .claude/CLAUDE.md     # AI guidelines
+----
+
+== Part of poly-ssg
+
+zigzag-ssg is a satellite of the https://github.com/hyperpolymath/poly-ssg-mcp[poly-ssg-mcp] hub.
+
+== License
+
+AGPL-3.0-or-later
