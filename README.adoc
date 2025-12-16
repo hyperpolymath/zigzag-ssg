@@ -1,68 +1,81 @@
 = zigzag-ssg
 :toc: auto
-:toclevels: 3
+:toclevels: 2
 
-**The definitive Zig static site generator.**
+image:https://img.shields.io/badge/RSR-compliant-gold[RSR Compliant,link=https://github.com/hyperpolymath/rhodium-standard-repositories]
+image:https://img.shields.io/badge/poly--ssg-satellite-blue[poly-ssg,link=https://github.com/hyperpolymath/poly-ssg]
+image:https://img.shields.io/badge/license-AGPL--3.0-green[License]
 
-== Overview
+**High-performance static site generator in Zig.**
 
-zigzag-ssg is a high-performance static site generator written in Zig.
-It provides zero-overhead abstractions and compile-time execution
-for maximum efficiency.
+Zero-overhead abstractions and compile-time templates for maximum speed.
 
-== Language Enforcement
+== Who Is This For?
 
-[IMPORTANT]
-====
-This SSG **MUST** be written in Zig. No exceptions.
+* **Zig developers** seeking native tooling
+* **Systems programmers** who need web content
+* **Performance obsessives** who count every byte
+* **Anyone wanting** comptime template validation
 
-Forbidden languages for SSG logic:
+== Why zigzag-ssg?
 
-* Python
-* JavaScript/TypeScript
-* C/C++ (use Zig)
-* Rust (different satellite)
-* Any language other than Zig
+=== Comptime Templates
 
-The **ONLY** non-Zig code allowed is the ReScript MCP adapter in `adapters/`.
-====
+Templates are evaluated at compile time. Invalid templates don't compile. Zero runtime overhead.
 
-== Features
+[source,zig]
+----
+const page = comptime template("base.html", .{
+    .title = "My Site",
+    .content = @embedFile("content.md"),
+});
+----
 
-* Compile-time execution (comptime) for zero-cost templates
-* Manual memory management without garbage collection
-* Excellent C interop for existing libraries
-* Cross-compilation from any host
-* Small, fast binaries
+=== Zero Allocations
 
-== Requirements
+Hot paths allocate nothing. Content streams directly from disk to output. Memory usage stays flat.
 
-* Zig 0.11+
+=== Cross-Compilation
 
-== Building
+Build your site generator for any target from any host. ARM, x86, WASM - your SSG goes everywhere.
+
+=== C Library Integration
+
+Need ImageMagick for thumbnails? libxml for XML sitemaps? Zig's C interop makes it seamless.
+
+== Quick Start
 
 [source,bash]
 ----
+# Build
 zig build
+
+# Create a site
+./zig-out/bin/zigzag-ssg init my-site
+cd my-site
+
+# Build the site
 ./zig-out/bin/zigzag-ssg build
+
+# Watch mode
+./zig-out/bin/zigzag-ssg watch
 ----
 
-== Project Structure
+== Features
 
-[source]
-----
-zigzag-ssg/
-├── src/                  # Zig source (THE SSG)
-├── adapters/             # ReScript MCP adapter only
-├── STATE.scm             # Project state
-├── ECOSYSTEM.scm         # Ecosystem position
-├── META.scm              # Architecture decisions
-└── .claude/CLAUDE.md     # AI guidelines
-----
+* **Comptime validation** - broken templates won't compile
+* **Allocation-free hot paths** - predictable memory usage
+* **Native binaries** - small, fast executables
+* **C library access** - use existing image/XML libraries
+* **Cross-compilation** - build for any platform
+
+== Requirements
+
+* Zig 0.11 or later
 
 == Part of poly-ssg
 
-zigzag-ssg is a satellite of the https://github.com/hyperpolymath/poly-ssg-mcp[poly-ssg-mcp] hub.
+zigzag-ssg is part of the https://github.com/hyperpolymath/poly-ssg[poly-ssg] family, unified through https://github.com/hyperpolymath/poly-ssg-mcp[MCP integration].
 
 == License
 
