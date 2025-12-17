@@ -1,13 +1,22 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# RSR-compliant CodeQL workflow with SHA-pinned actions
+# CodeQL workflow for zigzag-ssg
+#
+# Note: CodeQL does not support Zig. This workflow scans
+# the ReScript/JavaScript MCP adapter code in adapters/.
 
 name: "CodeQL"
 
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'adapters/**'
+      - '.github/workflows/codeql.yml'
   pull_request:
     branches: ["main"]
+    paths:
+      - 'adapters/**'
+      - '.github/workflows/codeql.yml'
   schedule:
     - cron: '42 20 * * 0'
 
@@ -15,29 +24,13 @@ permissions: read-all
 
 jobs:
   analyze:
-    name: Analyze (${{ matrix.language }})
+    name: Analyze JavaScript/TypeScript (MCP Adapter)
     runs-on: ubuntu-latest
     permissions:
       security-events: write
       packages: read
       actions: read
       contents: read
-
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          # Uncomment languages used in your project
-          # - language: rust
-          #   build-mode: manual
-          # - language: go
-          #   build-mode: autobuild
-          # - language: java-kotlin
-          #   build-mode: autobuild
-          - language: javascript-typescript
-            build-mode: none
-          # - language: python
-          #   build-mode: none
 
     steps:
       - name: Checkout repository
@@ -46,19 +39,10 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@ea9e4e37992a54ee68a9571571f9a567d8f90f78 # v3.28.0
         with:
-          languages: ${{ matrix.language }}
-          build-mode: ${{ matrix.build-mode }}
-
-      - name: Build (manual mode)
-        if: matrix.build-mode == 'manual'
-        shell: bash
-        run: |
-          echo "Manual build required - add your build commands here"
-          # cargo build --release
-          # mix compile
-          exit 1
+          languages: javascript-typescript
+          build-mode: none
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@ea9e4e37992a54ee68a9571571f9a567d8f90f78 # v3.28.0
         with:
-          category: "/language:${{ matrix.language }}"
+          category: "/language:javascript-typescript"
