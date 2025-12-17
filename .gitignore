@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# RSR-compliant .gitignore
+# .gitignore for zigzag-ssg (Zig SSG)
 
 # OS & Editor
 .DS_Store
@@ -10,53 +10,24 @@ Thumbs.db
 .idea/
 .vscode/
 
+# Zig
+zig-cache/
+zig-out/
+*.o
+*.a
+
 # Build
-/target/
-/_build/
 /build/
 /dist/
 /out/
 
+# ReScript (MCP adapter only)
+/adapters/lib/bs/
+/adapters/.bsb.lock
+/adapters/node_modules/
+
 # Dependencies
 /node_modules/
-/vendor/
-/deps/
-/.elixir_ls/
-
-# Rust
-# Cargo.lock  # Keep for binaries
-
-# Elixir
-/cover/
-/doc/
-*.ez
-erl_crash.dump
-
-# Julia
-*.jl.cov
-*.jl.mem
-/Manifest.toml
-
-# ReScript
-/lib/bs/
-/.bsb.lock
-
-# Python (SaltStack only)
-__pycache__/
-*.py[cod]
-.venv/
-
-# Ada/SPARK
-*.ali
-/obj/
-/bin/
-
-# Haskell
-/.stack-work/
-/dist-newstyle/
-
-# Chapel
-*.chpl.tmp.*
 
 # Secrets
 .env
@@ -67,7 +38,6 @@ secrets/
 
 # Test/Coverage
 /coverage/
-htmlcov/
 
 # Logs
 *.log
