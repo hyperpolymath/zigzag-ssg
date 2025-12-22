@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// SPDX-FileCopyrightText: 2025 Jonathan D.A. Jewell
+//
 // zigzag.zig - Zig-powered static site generator
 //
 // "ZigZag" - Fast and safe site generation
