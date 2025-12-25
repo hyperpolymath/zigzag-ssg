@@ -48,7 +48,7 @@ jobs:
           zig build run -- test-full
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v4
         with:
           name: zigzag-ssg-linux
           path: zig-out/bin/zigzag-ssg
@@ -108,7 +108,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
 
       - name: Check for Secrets
         run: |
@@ -148,7 +148,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
 
       - name: Check Required Docs
         run: |
@@ -184,10 +184,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@b39b52d1213e96004bfcb1c61a8a6fa8ab84f3e8 # v4
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v4
         with:
           node-version: '20'
           cache: 'npm'
@@ -216,10 +216,10 @@ jobs:
           - x86_64-windows-gnu
     steps:
       - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v4
 
       - name: Setup Zig
-        uses: goto-bus-stop/setup-zig@7ab2955eb728f5440978d5824358023be3a2802d # v2
+        uses: goto-bus-stop/setup-zig@abea47f85e598557f500fa1fd2ab7464fcb39406 # v2
         with:
           version: ${{ env.ZIG_VERSION }}
 
@@ -227,7 +227,7 @@ jobs:
         run: zig build -Dtarget=${{ matrix.target }} -Doptimize=ReleaseFast
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v4
         with:
           name: zigzag-ssg-${{ matrix.target }}
           path: zig-out/bin/zigzag-ssg*
